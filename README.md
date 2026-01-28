@@ -1,1 +1,1 @@
-# ecosystemSim
+# wildfireSim
