@@ -3,13 +3,18 @@ using DataStructures
 
 # apply cellular au
 const lst = [[0,1], [1,0], [0,-1], [-1,0], [1,1], [1,-1], [-1,1], [-1,-1]]
+treeCount = 0
 
 function forestCA(grid::Matrix{Float64}, N::Int64)
 
+    global treeCount
+    treeCount = 0
     newGrid = copy(grid)
 
     for i in 1:N
         for j in 1:N
+            treeCount += grid[i,j]
+
             if grid[i,j] < 0
                 newGrid[i,j] = 0
             elseif  neighbourhood(grid, i, j)^2 > rand() && grid[i,j] < 1
