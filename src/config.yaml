@@ -1,8 +1,10 @@
 flora:
-  sleep_time: 0.1
+  sleep_time: 0.25
 
 wildLife:
-  alpha_max: 1 #
-  beta: 1
-  gamma: 1
-  delta: 1
+  preyInitialPop: 100.0
+  predatorInitialPop: 5.0
+  alpha_max: 0.05
+  beta: 0.001
+  gamma: 0.04
+  delta: 0.001

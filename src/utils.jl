@@ -4,7 +4,10 @@ import YAML
 
 # apply cellular au
 const lst = [[0,1], [1,0], [0,-1], [-1,0], [1,1], [1,-1], [-1,1], [-1,-1]]
-treeCount = 0
+treeCount = 0.0
+
+preyPopulation = 50
+predatorPopulation = 20
 
 alpha_max = 1
 beta = 1
@@ -20,16 +23,18 @@ function loadData()
     global sleep_time = data["flora"]["sleep_time"]
 
     # wildLife
-    global alpha     = data["wildLife"]["alpha_max"]
-    global beta      = data["wildLife"]["beta"]
-    global gamma_max = data["wildLife"]["gamma"]
-    global delta     = data["wildLife"]["delta"]
+    global alpha_max          = data["wildLife"]["alpha_max"]
+    global beta               = data["wildLife"]["beta"]
+    global gamma              = data["wildLife"]["gamma"]
+    global delta              = data["wildLife"]["delta"]
+    global preyPopulation     = data["wildLife"]["preyInitialPop"]
+    global predatorPopulation = data["wildLife"]["predatorInitialPop"]
 
     println("flora:")
     println("   sleep_time: ", sleep_time)
 
     println("wildlife:")
-    println("   alpha: ", alpha, ", beta: ", beta, ", gamma_max: ", gamma_max, ", delta: ", delta, "\n\n")
+    println("   alpha_max: ", alpha_max, ", beta: ", beta, ", gamma: ", gamma, ", delta: ", delta, ", preyPopulation: ", preyPopulation, ", predatorPopulation: ", predatorPopulation, "\n\n")
 end
 
 function forestCA(grid::Matrix{Float64}, N::Int64)
@@ -90,4 +95,14 @@ function spawnThunder(grid::Matrix{Float64}, N::Int64)
         end
     end
     return grid
+end
+
+function updatePreys(x_t::Float64, y_t::Float64, N::Int64, VB::Float64)
+    alpha = alpha_max * (VB/(N^2))
+
+    return (alpha - beta * y_t + 1) * x_t
+end
+
+function updatePredator(y_t::Float64, x_t::Float64)
+    return (delta * x_t - gamma + 1) * y_t
 end
