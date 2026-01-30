@@ -1,0 +1,8 @@
+flora:
+  sleep_time: 0.1
+
+wildLife:
+  alpha_max: 1 #
+  beta: 1
+  gamma: 1
+  delta: 1

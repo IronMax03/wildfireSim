@@ -4,6 +4,7 @@ begin
     using Distributions
 
     include("utils.jl")
+    loadData()
 
     N = 200
 
@@ -43,8 +44,7 @@ end
 
 begin # events
     on(plus.clicks) do n
-        global grid
-        global gridObs
+        global grid,  gridObs
 
         grid = forestCA(grid, N)
         gridObs[] = grid
@@ -64,8 +64,6 @@ begin # events
 
         @async begin
             while isruning[]
-                println( treeCount)
-
                 grid = forestCA(grid, N)
                 gridObs[] = grid
 
@@ -75,7 +73,7 @@ begin # events
 
                 grid = spawnThunder(grid, N)
                 gridObs[] = grid
-                sleep(0.1)
+                sleep(sleep_time)
             end
         end
     end

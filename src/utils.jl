@@ -1,9 +1,36 @@
 using Distributions
 using DataStructures
+import YAML
 
 # apply cellular au
 const lst = [[0,1], [1,0], [0,-1], [-1,0], [1,1], [1,-1], [-1,1], [-1,-1]]
 treeCount = 0
+
+alpha_max = 1
+beta = 1
+gamma = 1
+delta = 1
+
+sleep_time = 1
+
+function loadData()
+    data = YAML.load_file("src/config.yaml")
+
+    # flora
+    global sleep_time = data["flora"]["sleep_time"]
+
+    # wildLife
+    global alpha     = data["wildLife"]["alpha_max"]
+    global beta      = data["wildLife"]["beta"]
+    global gamma_max = data["wildLife"]["gamma"]
+    global delta     = data["wildLife"]["delta"]
+
+    println("flora:")
+    println("   sleep_time: ", sleep_time)
+
+    println("wildlife:")
+    println("   alpha: ", alpha, ", beta: ", beta, ", gamma_max: ", gamma_max, ", delta: ", delta, "\n\n")
+end
 
 function forestCA(grid::Matrix{Float64}, N::Int64)
 
