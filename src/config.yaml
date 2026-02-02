@@ -1,10 +1,16 @@
 flora:
-  sleep_time: 0.25
+  N: 1500
+  plant_growth: 0.1
+  lightnings_per_updates: 5 # LPU
+  lightnings_success_probability: 0.25 # LSP
+  sleep_time: 0.5
 
 wildLife:
   preyInitialPop: 100.0
-  predatorInitialPop: 5.0
-  alpha_max: 0.05
-  beta: 0.001
-  gamma: 0.04
-  delta: 0.001
+  predatorInitialPop: 30.0
+  alpha_max: 5.0
+  beta: 0.1
+  gamma: 4
+  delta: 0.05
+  epsilon: 4.0
+  dt: 0.025

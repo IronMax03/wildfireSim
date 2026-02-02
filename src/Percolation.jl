@@ -6,8 +6,6 @@ begin
     include("utils.jl")
     loadData()
 
-    N = 700
-
     grid = rand(Beta(0.1, 0.6), N, N)
 
     isruning = Observable(false)
@@ -39,58 +37,68 @@ begin # window
     glGraph = GridLayout(fig[1, 2], tellwidth = false)
 
     # trees graph
-    ax2 = Axis(glGraph[1, 1])
+    ax2 = Axis(glGraph[1, 1], title = "Normalized tree population per iteration")
     lines!(ax2, treeCountLstObs; color = :green)
 
     # wildlife graph
-    ax3 = Axis(glGraph[2, 1])
-    lines!(ax3, preyPopulationLstObs; color = :blue)
-    lines!(ax3, predatorPopulationLstObs; color = :red)
+    ax3 = Axis(glGraph[2, 1], title = "Normalized predator and prey population per iteration")
+    preysLine = lines!(ax3, preyPopulationLstObs; color = :blue)
+    predatorsLine = lines!(ax3, predatorPopulationLstObs; color = :red)
+
+    Legend(glGraph[2, 2],
+    [preysLine, predatorsLine],
+    ["preys", "predators"])
 
     display(fig)
 
     # buttons grid
-    glButtons = GridLayout(fig[2, 1], tellwidth = false)
-
-    # buttons
-    plus = Button(glButtons[1, 4], label = "+")
+    glButtons = GridLayout(glGraph[3, 1], tellwidth = false)
+    plus50 = Button(glButtons[1, 6], label = "+ 50")
+    plus25 = Button(glButtons[1, 5], label = "+ 25")
+    plus1 = Button(glButtons[1, 4], label = "+ 1")
     startButtons = Button(glButtons[1, 3], label = "start")
     stopButtons = Button(glButtons[1, 2], label = "stop")
     resetButtons = Button(glButtons[1, 1], label = "reset")
+
+    # buttons
+    textGl = GridLayout(fig[2, 1], tellwidth = false)
+    Label(textGl[1, 1], constantsStr)
 end
 
 begin # events
+    on(plus50.clicks) do n
+        global isruning
+        if !isruning[]
+            for i in 1:50
+                updateSim()
+                updateGraphs()
+            end
+
+            println("simulating a 50 iteration")
+        end
+    end
+
+    on(plus25.clicks) do n
+        global isruning
+        if !isruning[]
+            for i in 1:25
+                updateSim()
+                updateGraphs()
+            end
+
+            println("simulating a 25 iteration")
+        end
+    end
+
     # run 1 simulation update
-    on(plus.clicks) do n
-        global grid,  gridObs, predatorPopulation, preyPopulation
-        global preyPopulationLst, predatorPopulationLst, preyPopulationLstObs, predatorPopulationLstObs
+    on(plus1.clicks) do n
+        global isruning
+        if !isruning[]
+            updateSim()
+            updateGraphs()
 
-        grid = forestCA(grid, N)
-        gridObs[] = grid
-
-        # update tree count graph
-        push!(treeCountLst, treeCount)
-        treeCountLstObs[] = treeCountLst
-
-        # spawn thunder
-        grid = spawnThunder(grid, N)
-        gridObs[] = grid
-
-        # update prey population
-        preyPopulation = updatePreys(preyPopulation, predatorPopulation, N, treeCount)
-        push!(preyPopulationLst, preyPopulation)
-        preyPopulationLstObs[] = preyPopulationLst
-        println("preyPopulation: ", preyPopulation)
-
-        # update predator population
-        predatorPopulation  = updatePredator(predatorPopulation, preyPopulation)
-        push!(predatorPopulationLst, predatorPopulation)
-        predatorPopulationLstObs[] = predatorPopulationLst
-
-        # resize graphs
-        autolimits!(ax2)
-        autolimits!(ax3)
-
+            println("simulating a 1 iteration")
+        end
     end
 
     # start simulation loop
@@ -98,38 +106,12 @@ begin # events
         println("start simulation")
 
         @async begin
-            global grid, gridObs, treeCount, treeCountLst, treeCountLstObs, preyPopulation, predatorPopulation, N
-            global preyPopulationLst, predatorPopulationLst, sleep_time
+            # simulation variable and constant
             global isruning[] = true
 
             while isruning[]
-                # run tree growth cellular automaton
-                grid = forestCA(grid, N)
-                gridObs[] = grid
-
-                # update tree count graph
-                push!(treeCountLst, treeCount)
-                treeCountLstObs[] = treeCountLst
-
-                # spawn thunder
-                grid = spawnThunder(grid, N)
-                gridObs[] = grid
-
-                # update prey population
-                preyPopulation = updatePreys(preyPopulation, predatorPopulation, N, treeCount)
-                push!(preyPopulationLst, preyPopulation)
-                preyPopulationLstObs[] = preyPopulationLst
-                println("preyPopulation: ", preyPopulation)
-
-                # update predator population
-                predatorPopulation  = updatePredator(predatorPopulation, preyPopulation)
-                push!(predatorPopulationLst, predatorPopulation)
-                predatorPopulationLstObs[] = predatorPopulationLst
-                println("predatorPopulation: ", predatorPopulation)
-
-                # resize graphs
-                autolimits!(ax2)
-                autolimits!(ax3)
+                updateSim()
+                updateGraphs()
                 
                 sleep(sleep_time)
             end
@@ -142,11 +124,11 @@ begin # events
         println("stop simulation")
     end
 
-    # reset simulation
+    # reset simulation & load simulation data
     on(resetButtons.clicks) do n
         loadData()
-        global isruning[] = false
 
+        global isruning[] = false
         global grid = rand(Beta(0.1, 0.6), N, N)
         global gridObs[] = grid
 
@@ -158,6 +140,11 @@ begin # events
         global treeCountLstObs[] = treeCountLst
         global preyPopulationLstObs[] = preyPopulationLst
         global predatorPopulationLstObs[] = predatorPopulationLst
+
+        # reframe graphs
+        autolimits!(ax)
+        autolimits!(ax2)
+        autolimits!(ax3)
 
         println("reset simulation")
     end
