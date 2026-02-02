@@ -37,7 +37,7 @@ In the simulation, we absorb the time step $\Delta t$ into the parameters $\alph
 - $y_{t+1}=-\gamma y_t +\delta x_ty_t+y_t$  
 
 > [!CAUTION]  
-> In my code absorbtion of time apends after the start of the simulation loop. Such that `alpha = alpha * delta_t` and so on.
+> In my code, absorbtion of time apends after the start of the simulation loop. Such that `alpha = alpha * delta_t` and so on.
 
 To account for vegetation availability, the prey growth rate is coupled to the vegetal biomass and prey population, leading to competition for resources. In order to model this, we modify the prey growth rate $\alpha$ as follows:
 - $\alpha=\alpha_{max}\cdot\frac{B_v-x_t}{N^2}$
