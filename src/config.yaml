@@ -1,9 +1,9 @@
 flora:
-  N: 1500
+  N: 150
   plant_growth: 0.1
-  lightnings_per_updates: 5 # LPU
+  lightnings_per_updates: 4 # LPU
   lightnings_success_probability: 0.25 # LSP
-  sleep_time: 0.5
+  sleep_time: 0.1
 
 wildLife:
   preyInitialPop: 100.0

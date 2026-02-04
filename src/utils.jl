@@ -51,7 +51,7 @@ function forestCA(grid::Matrix{Float64}, N::Int64)::Matrix{Float64}
             if grid[i,j] < 0
                 newGrid[i,j] = 0
             elseif neighbourhood(grid, i, j)^2 > rand() && grid[i,j] < 1
-                newGrid[i,j] = max(0, newGrid[i,j] + plant_growth - preyPopulation/(N^2))
+                newGrid[i,j] = min(1, max(0, newGrid[i,j] + plant_growth - preyPopulation/(N^2)))
             end
         end
     end
