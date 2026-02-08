@@ -1,17 +1,25 @@
 # wildfireSim
-
 > [!WARNING]
 >The documentation is currently a work in progress; some sections may be empty and some mistakes not corrected.
 
-## Requirement
-To ensure all packeges to run the simulation are installed run [Pakages.jl](src/Pakages.jl)
+An interactive ecosystem simulator that models vegetation growth with a stochastic cellular automaton, wildfires triggered by lightning strikes, and predator–prey interactions. 
+
+## Requirements
+
+This project is written in [**Julia**](https://julialang.org/) programing language.
+
+To install all required packages, run:
+``` julia
+julia src/Packages.jl
+```
 
 ## Disclamer
-In this project I used chatgpt for reviewing documentation **only**. The entire code and model have been created without the assistence of any chatbot.
+ChatGPT was used only for reviewing and improving documentation clarity.
+All modeling choices, equations, and code were designed and implemented independently.
 
 ## Documentation Guide
 
 - [Full Model Description](doc/model.md)
   - [Numerical Implementation of predators-preys](doc/model.md#Wildlife-(predators-&-preys))
   - [vegetation growth CA](doc/model.md#vegetation-growth-CA)
-- [Examples of Runs](doc/img/)
+- [Examples of Runs](doc/img/simulation_screenshots/)
