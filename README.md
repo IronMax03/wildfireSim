@@ -3,10 +3,10 @@
 <img width="100%" alt="example of simulation" src="doc/img/simulation_screenshots/Screenshot 2026-02-09 at 00.45.28.png" />
 </div>
 
+An interactive ecosystem simulator that models vegetation growth with a stochastic cellular automaton, wildfires triggered by lightning strikes, and predator–prey interactions. 
+
 > [!WARNING]
 >The documentation is currently a work in progress; some sections may be empty and some mistakes not corrected.
-
-An interactive ecosystem simulator that models vegetation growth with a stochastic cellular automaton, wildfires triggered by lightning strikes, and predator–prey interactions. 
 
 ## Requirements
 
