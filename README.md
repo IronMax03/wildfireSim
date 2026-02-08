@@ -1,6 +1,6 @@
 # wildfireSim
 <div align="center">
-<img width="75%" alt="example of simulation" src="doc/img/simulation_screenshots/Screenshot 2026-02-09 at 00.45.28.png" />
+<img width="100%" alt="example of simulation" src="doc/img/simulation_screenshots/Screenshot 2026-02-09 at 00.45.28.png" />
 </div>
 
 > [!WARNING]
