@@ -1,0 +1,31 @@
+name: Issue Report
+description: File a bug report.
+title: 'Enter a short title that describes the issue' # Placeholder for the user to edit
+labels: [bug]
+
+body:
+- type: dropdown
+  attributes:
+    label: issue_type
+    options:
+    - 📚 Documentation Issue
+    - 🧠 Conceptual Issue  
+    - 💻 Code Issue
+    - ❓ Unspecified
+    default: 0
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Steps to Reproduce the Issue / What's wrong.
+    placeholder: Enumerate all the steps to reproduce the bug.
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: Expected behavior
+    placeholder: A clear and concise description of what you expected to happen / Correction.
+  validations:
+    required: true

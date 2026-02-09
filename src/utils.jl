@@ -78,7 +78,6 @@ function spawnThunder(grid::Matrix{Float64}, N::Int64)::Matrix{Float64}
     if grid[x, y] > 0.5
         grid[x, y] = -1
 
-        #new
         q = Queue{Vector{Int64}}()
         enqueue!(q, [x, y])
         while length(q) != 0
