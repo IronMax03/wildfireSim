@@ -17,10 +17,6 @@ To install all required packages, run:
 julia src/Packages.jl
 ```
 
-## Disclamer
-ChatGPT was used only for reviewing and improving documentation clarity.
-All modeling choices, equations, and code were designed and implemented independently.
-
 ## Documentation Guide
 
 - [Full Model Description](doc/model.md)
