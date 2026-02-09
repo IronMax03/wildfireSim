@@ -99,7 +99,6 @@ end
 
 function updatePreys(x_t::Float64, y_t::Float64, N::Int64, VB::Float64)::Float64
     alpha = alpha_max * (VB - epsilon*x_t)/(N^2)
-    #alpha = alpha_max
 
     return (alpha - beta * y_t + 1) * x_t
 end

@@ -17,6 +17,13 @@ To install all required packages, run:
 julia src/Packages.jl
 ```
 
+## Reporting Issues
+
+This project uses a structured issue template to ensure bug reports are clear, actionable, and easy to triage.
+Please use the provided Issue Report template when opening a new issue and make sure to fill in all required fields.
+
+Providing complete and precise information helps identify, reproduce, and fix issues more efficiently.
+
 ## Documentation Guide
 
 - [Full Model Description](doc/model.md)
