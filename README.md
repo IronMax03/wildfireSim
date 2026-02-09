@@ -10,12 +10,21 @@ An interactive ecosystem simulator that models vegetation growth with a stochast
 
 ## Requirements
 
-This project is written in [**Julia**](https://julialang.org/) programing language.
+This project is written in the [**Julia**](https://julialang.org/) programming language.
 
-To install all required packages, run:
-``` julia
-julia src/Packages.jl
+The project uses a local Julia environment to ensure reproducibility.
+All required dependencies are specified in Project.toml and Manifest.toml.
+
+To set up the environment:
+``` bash
+julia --project=.
 ```
+Then, inside the Julia REPL:
+``` julia
+]
+instantiate
+```
+This will automatically install all required packages with the exact versions used for development.
 
 ## Reporting Issues
 
