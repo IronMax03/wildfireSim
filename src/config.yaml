@@ -1,5 +1,5 @@
 flora:
-  N: 150
+  N: 600
   plant_growth: 0.1
   lightnings_per_updates: 4 # LPU
   lightnings_success_probability: 0.25 # LSP

@@ -13,15 +13,15 @@ end
 
 
 begin # window
+    # Initializing Graph variables
     treeCountLst = Float64[]
     preyPopulationLst = Float64[]
     predatorPopulationLst = Float64[]
-
     treeCountLstObs = Observable(treeCountLst)
     preyPopulationLstObs = Observable(preyPopulationLst)
     predatorPopulationLstObs = Observable(predatorPopulationLst)
 
-    gridObs = Observable(grid) # displayed grid
+    gridObs = Observable(grid)
 
     fig = Figure(size = (1200, 800))
     ax = Axis(fig[1, 1], aspect = DataAspect())
